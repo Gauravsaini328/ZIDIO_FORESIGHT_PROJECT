@@ -5,17 +5,16 @@ import os
 app = Flask(__name__)
 
 # Project paths
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-FORECAST_PATH = os.path.join(BASE_DIR,"deployment_data","sku_8_week_forecast.csv")
-RISK_PATH = os.path.join(BASE_DIR,"deployment_data","sku_risk_scoring.csv")
-
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FORECAST_PATH = os.path.join(BASE_DIR, "sku_8_week_forecast.csv")
+RISK_PATH = os.path.join(BASE_DIR, "sku_risk_scoring.csv")
 # Load data
 forecast_df = pd.read_csv(FORECAST_PATH)
 risk_df = pd.read_csv(RISK_PATH)
 
 # Convert forecast date
 forecast_df["Week"] = pd.to_datetime(forecast_df["Week"])
+
 
 
 @app.route("/", methods=["GET"])
